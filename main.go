@@ -17,6 +17,7 @@ func main() {
 	database.DB.AutoMigrate(
 		&models.User{},
 		&models.Locker{},
+		&models.Post{},
 	)
 
 	r := mux.NewRouter()
@@ -26,6 +27,9 @@ func main() {
 
 	r.HandleFunc("/lockers",controllers.GetAllLockers).Methods("GET")
 	r.HandleFunc("/lockers",controllers.CreateLocker).Methods("POST")
+	
+	r.HandleFunc("/posts",controllers.GetAllPosts).Methods("GET")
+	r.HandleFunc("/posts",controllers.CreatePost).Methods("POST")
 
 	log.Fatal(http.ListenAndServe(":5000",r))
 }

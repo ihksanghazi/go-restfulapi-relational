@@ -4,6 +4,7 @@ type User struct {
 	Id     int            `json:"id" gorm:"primaryKey"`
 	Name   string         `json:"name" gorm:"not null"`
 	Locker LockerResponse `json:"locker"`
+	Posts  []PostResponse `json:"Posts"`
 }
 
 type UserResponse struct {

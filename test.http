@@ -19,3 +19,15 @@ POST http://localhost:5000/lockers
   "user_id":2
 }
 
+### GET ALL POSTS
+GET http://localhost:5000/posts
+
+### Create POST
+POST http://localhost:5000/posts
+
+{
+  "title":"Judul 3",
+  "body":"Isi Judul 3",
+  "user_id":2
+}
+

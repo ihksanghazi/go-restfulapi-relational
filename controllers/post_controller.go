@@ -9,34 +9,34 @@ import (
 	"github.com/ihksanghazi/go-restfulapi-relational/models"
 )
 
-func GetAllUsers(w http.ResponseWriter, r *http.Request) {
-	var users []models.User
+func GetAllPosts(w http.ResponseWriter, r *http.Request) {
+	var posts []models.Post
 
-	if err:= database.DB.Preload("Locker").Preload("Posts").Find(&users).Error; err != nil {
+	if err:= database.DB.Preload("User").Find(&posts).Error; err != nil {
 		response:= map[string]string{"msg":err.Error()}
 		helpers.ResponseJSON(w,http.StatusInternalServerError,response)
 		return
 	}
 
-	helpers.ResponseJSON(w,http.StatusOK,users)
+	helpers.ResponseJSON(w,http.StatusOK,posts)
 }
 
-func CreateUser(w http.ResponseWriter, r *http.Request) {
+func CreatePost(w http.ResponseWriter, r *http.Request) {
 	// mengambil input dari json
-	var userInput models.User
+	var postInput models.Post
 	decoder:= json.NewDecoder(r.Body)
-	if err:= decoder.Decode(&userInput); err != nil {
+	if err:= decoder.Decode(&postInput); err != nil {
 		response:= map[string]string{"msg":err.Error()}
 		helpers.ResponseJSON(w,http.StatusBadRequest,response)
 		return
 	}
 	defer r.Body.Close()
 
-	if err:= database.DB.Create(&userInput).Error; err != nil {
+	if err:= database.DB.Create(&postInput).Error; err != nil {
 		response:= map[string]string{"msg":err.Error()}
 		helpers.ResponseJSON(w,http.StatusInternalServerError,response)
 		return
 	}
 
-	helpers.ResponseJSON(w,http.StatusCreated,userInput)
+	helpers.ResponseJSON(w,http.StatusCreated,postInput)
 }
