@@ -1,0 +1,21 @@
+### GET ALL USERS
+GET http://localhost:5000/users
+
+### Create User
+POST http://localhost:5000/users
+
+{
+  "name":"Sendi Winoto"
+}
+
+### GET ALL Lockers
+GET http://localhost:5000/lockers
+
+### Create Locker
+POST http://localhost:5000/lockers
+
+{
+  "code":"A002",
+  "user_id":2
+}
+
